@@ -3,8 +3,19 @@ pipeline {
     agent any
 
     tools {
+
         maven 'Maven-3'
     }
+    maven 'Maven-3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/Sruthi9299/gir-devsecops-internship.git'
+            }
+        }
+
 
     stages {
         stage('Build') {
