@@ -1,15 +1,12 @@
+
 pipeline {
     agent any
-   tools {
-    maven 'Maven-3'
-     }
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Sruthi9299/gir-devsecops-internship.git'
-            }
-        }
 
+    tools {
+        maven 'Maven-3'
+    }
+
+    stages {
         stage('Build') {
             steps {
                 sh 'mvn clean package'
