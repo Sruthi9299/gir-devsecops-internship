@@ -2,11 +2,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven "Maven-3"
-        jdk "JDK-17"
-    }
-
     stages {
 
         stage('Checkout') {
@@ -23,7 +18,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t YOUR_DOCKERHUB_USERNAME/task9-app:latest .'
+                sh 'docker build -t santisruthi/task9-app:latest .'
             }
         }
 
