@@ -3,8 +3,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven-3'
-        jdk 'JDK-17'
+        maven "Maven-3"
+        jdk "JDK-17"
     }
 
     stages {
@@ -21,6 +21,39 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t YOUR_DOCKERHUB_USERNAME/task9-app:latest .'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'santisruthi',
+                    passwordVariable: 'Sruthi@9299'
+                )]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                sh 'docker push santisruthi/task9-app:latest'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed.'
+        }
     }
 }
 
