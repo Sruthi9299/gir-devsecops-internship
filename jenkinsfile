@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    tools {
+       git 'default'
+       maven 'Maven3'
+       jdk 'JDK11'
+    }
     stages {
         stage('Checkout') {
             steps { git 'https://github.com/Sruthi9299/gir-devsecops-internship.git' }
